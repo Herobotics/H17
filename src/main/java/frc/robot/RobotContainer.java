@@ -55,8 +55,8 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(
         new RunCommand(
             () ->
-                m_drivetrain.drive(m_driverController.getLeftX(),
-                    -m_driverController.getLeftY(), -m_driverController.getRightX()),
+                m_drivetrain.drive(m_driverController.getLeftY() * 0.10,
+                    -m_driverController.getLeftX() * 0.10, -m_driverController.getRightX() * .10),
             m_drivetrain));
 
     /*Create an inline sequence to run when the operator presses and olds the A (green) button. Run the PrepareLaunch
