@@ -35,7 +35,8 @@ public class CANDrivetrain extends SubsystemBase {
     CANSparkMax leftRear = new CANSparkMax(kLeftRearID, MotorType.kBrushed);
     CANSparkMax rightFront = new CANSparkMax(kRightFrontID, MotorType.kBrushed);
     CANSparkMax rightRear = new CANSparkMax(kRightRearID, MotorType.kBrushed);
-    ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+    try (ADXRS450_Gyro gyro = new ADXRS450_Gyro()) {
+    }
 
     /*Sets current limits for the drivetrain motors. This helps reduce the likelihood of wheel spin, reduces motor heating
      *at stall (Drivetrain pushing against something) and helps maintain battery voltage under heavy demand */
@@ -65,6 +66,15 @@ m_drivetrain = new MecanumDrive(leftFront, leftRear, rightFront,rightRear);
   public void drive(double speed_x, double speed_y, double rotation) {
     m_drivetrain.driveCartesian(speed_x, speed_y, rotation, gyro.getRotation2d());
   }
+
+  public void GyroCalibrate() {
+    gyro.calibrate();
+  }
+  public void GyroReset() {
+    gyro.reset();
+  } 
+
+
 
   @Override
   public void periodic() {
