@@ -8,6 +8,8 @@ import static frc.robot.Constants.DrivetrainConstants.*;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -23,6 +25,7 @@ public class CANDrivetrain extends SubsystemBase {
   /*Class member variables. These variables represent things the class needs to keep track of and use between
   different method calls. */
   MecanumDrive m_drivetrain;
+  ADXRS450_Gyro gyro;
 
   /*Constructor. This method is called when an instance of the class is created. This should generally be used to set up
    * member variables and perform any configuration or set up necessary on hardware.
@@ -32,6 +35,7 @@ public class CANDrivetrain extends SubsystemBase {
     CANSparkMax leftRear = new CANSparkMax(kLeftRearID, MotorType.kBrushed);
     CANSparkMax rightFront = new CANSparkMax(kRightFrontID, MotorType.kBrushed);
     CANSparkMax rightRear = new CANSparkMax(kRightRearID, MotorType.kBrushed);
+    ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
     /*Sets current limits for the drivetrain motors. This helps reduce the likelihood of wheel spin, reduces motor heating
      *at stall (Drivetrain pushing against something) and helps maintain battery voltage under heavy demand */
@@ -59,7 +63,7 @@ m_drivetrain = new MecanumDrive(leftFront, leftRear, rightFront,rightRear);
   /*Method to control the drivetrain using arcade drive. Arcade drive takes a speed in the X (forward/back) direction
    * and a rotation about the Z (turning the robot about it's center) and uses these to control the drivetrain motors */
   public void drive(double speed_x, double speed_y, double rotation) {
-    m_drivetrain.driveCartesian(speed_x, speed_y, rotation);
+    m_drivetrain.driveCartesian(speed_x, speed_y, rotation, gyro.getRotation2d());
   }
 
   @Override
