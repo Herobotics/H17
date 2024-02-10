@@ -20,8 +20,8 @@ public final class Autos {
      * with the .withTimeout(1) decorator to timeout after 1 second, and use the .andThen decorator
      * to stop the drivetrain after the first command times out
      */
-    return new RunCommand(() -> drivetrain.drive(0, -.5, 0), drivetrain)
-        .withTimeout(1)
+    return new RunCommand(() -> drivetrain.drive(-0.75, 0, 0), drivetrain)
+        .withTimeout(0.5)
         .andThen(new RunCommand(() -> drivetrain.drive(0, 0, 0), drivetrain));
   }
 
