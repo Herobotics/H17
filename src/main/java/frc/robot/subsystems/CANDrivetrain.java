@@ -35,8 +35,7 @@ public class CANDrivetrain extends SubsystemBase {
     CANSparkMax leftRear = new CANSparkMax(kLeftRearID, MotorType.kBrushed);
     CANSparkMax rightFront = new CANSparkMax(kRightFrontID, MotorType.kBrushed);
     CANSparkMax rightRear = new CANSparkMax(kRightRearID, MotorType.kBrushed);
-    try (ADXRS450_Gyro gyro = new ADXRS450_Gyro()) {
-    }
+    gyro = new ADXRS450_Gyro();
 
     /*Sets current limits for the drivetrain motors. This helps reduce the likelihood of wheel spin, reduces motor heating
      *at stall (Drivetrain pushing against something) and helps maintain battery voltage under heavy demand */
@@ -53,7 +52,6 @@ public class CANDrivetrain extends SubsystemBase {
     leftFront.setInverted(false);
     rightFront.setInverted(true);
     rightRear.setInverted(true);
-// TODO: figure out all inversions
 
     // Put the front motors into the differential drive object. This will control all 4 motors with
     // the rears set to follow the fronts
@@ -73,8 +71,6 @@ m_drivetrain = new MecanumDrive(leftFront, leftRear, rightFront,rightRear);
   public void GyroReset() {
     gyro.reset();
   } 
-
-
 
   @Override
   public void periodic() {

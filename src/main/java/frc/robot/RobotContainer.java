@@ -59,6 +59,11 @@ public class RobotContainer {
                     -m_driverController.getLeftX() * 0.75, -m_driverController.getRightX() * 0.75),
             m_drivetrain));
 
+    // Set a "reset gyro" button
+    m_driverController.a().onTrue(new RunCommand(
+      () -> m_drivetrain.GyroReset(), m_drivetrain
+      ));
+
     /*Create an inline sequence to run when the operator presses and olds the A (green) button. Run the PrepareLaunch
      * command for 1 seconds and then run the LaunchNote command */
     m_operatorController
@@ -82,5 +87,9 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     return Autos.exampleAuto(m_drivetrain);
+  }
+
+  public void calibrateGyro() {
+    m_drivetrain.GyroCalibrate();
   }
 }
