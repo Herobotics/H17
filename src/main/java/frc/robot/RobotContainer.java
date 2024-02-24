@@ -16,6 +16,7 @@ import frc.robot.subsystems.CANDrivetrain;
 import frc.robot.subsystems.PWMDrivetrain;
 import frc.robot.subsystems.PWMLauncher;
 
+
 // import frc.robot.subsystems.CANDrivetrain;
 // import frc.robot.subsystems.CANLauncher;
 
@@ -60,7 +61,7 @@ public class RobotContainer {
             m_drivetrain));
 
     // Set a "reset gyro" button
-    m_driverController.a().onTrue(new RunCommand(
+    m_driverController.b().whileTrue(new RunCommand(
       () -> m_drivetrain.GyroReset(), m_drivetrain
       ));
 
