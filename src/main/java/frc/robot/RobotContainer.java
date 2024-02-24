@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax;
+
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -64,6 +67,12 @@ public class RobotContainer {
     m_driverController.b().whileTrue(new RunCommand(
       () -> m_drivetrain.GyroReset(), m_drivetrain
       ));
+
+    // Attempt at a "inverse drive" button. Currently untested
+    m_driverController.x().toggleOnTrue(new RunCommand(
+      () -> m_drivetrain.drive(m_driverController.getLeftY() * -0.75,
+                    -m_driverController.getLeftX() * -0.75, -m_driverController.getRightX() * -0.75),
+            m_drivetrain));
 
     /*Create an inline sequence to run when the operator presses and olds the A (green) button. Run the PrepareLaunch
      * command for 1 seconds and then run the LaunchNote command */
