@@ -62,7 +62,8 @@ m_drivetrain = new MecanumDrive(leftFront, leftRear, rightFront,rightRear);
   /*Method to control the drivetrain using arcade drive. Arcade drive takes a speed in the X (forward/back) direction
    * and a rotation about the Z (turning the robot about it's center) and uses these to control the drivetrain motors */
   public void drive(double speed_x, double speed_y, double rotation) {
-    m_drivetrain.driveCartesian(speed_x, speed_y, rotation, gyro.getRotation2d());
+    //m_drivetrain.driveCartesian(speed_x, speed_y, rotation, gyro.getRotation2d());
+    m_drivetrain.driveCartesian(speed_x, speed_y, rotation);
   }
 
   public void GyroCalibrate() {

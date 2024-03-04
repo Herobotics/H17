@@ -6,18 +6,19 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.LauncherConstants.*;
 
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+// import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class PWMLauncher extends SubsystemBase {
-  PWMSparkMax m_launchWheel;
-  PWMSparkMax m_feedWheel;
+  VictorSP m_launchWheel;
+  VictorSP m_feedWheel;
 
   /** Creates a new Launcher. */
   public PWMLauncher() {
-    m_launchWheel = new PWMSparkMax(kLauncherID);
-    m_feedWheel = new PWMSparkMax(kFeederID);
+    m_launchWheel = new VictorSP(kLauncherID);
+    m_feedWheel = new VictorSP(kFeederID);
   }
 
   /**
