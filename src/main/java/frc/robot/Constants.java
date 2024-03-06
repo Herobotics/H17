@@ -32,6 +32,9 @@ public final class Constants {
 
     // Current limit for drivetrain motors
     public static final int kCurrentLimit = 60;
+
+    public static final double kDriveScale = 0.75;
+    public static final double kTurnScale = 0.75;
   }
 
   public static class LauncherConstants {

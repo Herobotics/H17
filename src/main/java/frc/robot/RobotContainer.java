@@ -4,12 +4,15 @@
 
 package frc.robot;
 
+import static frc.robot.Constants.DrivetrainConstants.kDriveScale;
+
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.Constants.LauncherConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
@@ -59,8 +62,7 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(
         new RunCommand(
             () ->
-                m_drivetrain.drive(applyDeadband(m_driverController.getLeftY()) * 0.75,
-                    applyDeadband(-m_driverController.getLeftX()) * 0.75, applyDeadband(-m_driverController.getRightX()) * 0.75),
+               driveWithControllerAndInversion(m_driverController, false),
             m_drivetrain));
 
     // Set a "reset gyro" button
@@ -70,8 +72,7 @@ public class RobotContainer {
 
     // Attempt at a "inverse drive" button.
     m_driverController.x().toggleOnTrue(new RunCommand(
-      () -> m_drivetrain.drive(applyDeadband(m_driverController.getLeftY()) * -0.75,
-                    applyDeadband(-m_driverController.getLeftX()) * -0.75, applyDeadband(-m_driverController.getRightX()) * -0.75),
+      () -> driveWithControllerAndInversion(m_driverController, true),
             m_drivetrain));
 
     /*Create an inline sequence to run when the operator presses and olds the A (green) button. Run the PrepareLaunch
@@ -134,5 +135,16 @@ public class RobotContainer {
 
     // Finally, scale up to [-1,1]
     return input / (1.0 - OperatorConstants.kJoystickDeadband);
+  }
+
+  public void driveWithControllerAndInversion(CommandXboxController controller, boolean invert) {
+    double direction = 1.0;
+    if (invert) {
+      direction = -1.0;
+    }
+
+    m_drivetrain.drive(applyDeadband(controller.getLeftY()) * DrivetrainConstants.kDriveScale * direction,
+                    applyDeadband(-controller.getLeftX()) * DrivetrainConstants.kDriveScale * direction,
+                    applyDeadband(-controller.getRightX()) * DrivetrainConstants.kTurnScale * direction);
   }
 }
