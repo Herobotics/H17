@@ -59,8 +59,8 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(
         new RunCommand(
             () ->
-                m_drivetrain.drive(m_driverController.getLeftY() * 0.75,
-                    -m_driverController.getLeftX() * 0.75, -m_driverController.getRightX() * 0.75),
+                m_drivetrain.drive(applyDeadband(m_driverController.getLeftY()) * 0.75,
+                    applyDeadband(-m_driverController.getLeftX()) * 0.75, applyDeadband(-m_driverController.getRightX()) * 0.75),
             m_drivetrain));
 
     // Set a "reset gyro" button
@@ -68,10 +68,10 @@ public class RobotContainer {
       () -> m_drivetrain.GyroReset(), m_drivetrain
       ));
 
-    // Attempt at a "inverse drive" button. Currently untested
+    // Attempt at a "inverse drive" button.
     m_driverController.x().toggleOnTrue(new RunCommand(
-      () -> m_drivetrain.drive(m_driverController.getLeftY() * -0.75,
-                    -m_driverController.getLeftX() * -0.75, -m_driverController.getRightX() * -0.75),
+      () -> m_drivetrain.drive(applyDeadband(m_driverController.getLeftY()) * -0.75,
+                    applyDeadband(-m_driverController.getLeftX()) * -0.75, applyDeadband(-m_driverController.getRightX()) * -0.75),
             m_drivetrain));
 
     /*Create an inline sequence to run when the operator presses and olds the A (green) button. Run the PrepareLaunch
@@ -101,5 +101,18 @@ public class RobotContainer {
 
   public void calibrateGyro() {
     m_drivetrain.GyroCalibrate();
+  }
+
+  public double applyDeadband(double input) {
+    if (Math.abs(input) < OperatorConstants.kJoystickDeadband) {
+      input = 0.0;
+    } else if (input > 0) {
+      input -= OperatorConstants.kJoystickDeadband;
+    } else {
+      input += OperatorConstants.kJoystickDeadband;
+    }
+
+    // Finally, scale up to [-1,1]
+    return input / (1.0 - OperatorConstants.kJoystickDeadband);
   }
 }

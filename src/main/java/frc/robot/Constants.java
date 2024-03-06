@@ -18,6 +18,9 @@ public final class Constants {
     // tab of the DriverStation
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 1;
+
+    // Constants for transforming controller input
+    public static final double kJoystickDeadband = 0.1;  // values below this amount will map to 0, needs to be in [0, 1)
   }
 
   public static class DrivetrainConstants {
@@ -47,6 +50,6 @@ public final class Constants {
     public static final double kIntakeLauncherSpeed = -1;
     public static final double kIntakeFeederSpeed = -.2;
 
-    public static final double kLauncherDelay = 0.5;
+    public static final double kLauncherDelay = 1.0;
   }
 }
