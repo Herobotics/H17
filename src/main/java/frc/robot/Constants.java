@@ -34,7 +34,7 @@ public final class Constants {
     public static final int kCurrentLimit = 60;
 
     // Limit top speeds
-    public static final double kDriveScale = 0.75;
+    public static final double kDriveScale = 1.0;
     public static final double kTurnScale = 0.75;
 
     // Autonomous speed
