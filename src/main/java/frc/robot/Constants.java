@@ -33,8 +33,14 @@ public final class Constants {
     // Current limit for drivetrain motors
     public static final int kCurrentLimit = 60;
 
+    // Limit top speeds
     public static final double kDriveScale = 0.75;
     public static final double kTurnScale = 0.75;
+
+    // Autonomous speed
+    public static final double kAutoSpeed = 0.2;
+    public static final double kAutoDriveTime = 10;
+    // Autonomous duration
   }
 
   public static class LauncherConstants {

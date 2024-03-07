@@ -4,6 +4,9 @@
 
 package frc.robot.commands;
 
+import static frc.robot.Constants.DrivetrainConstants.kAutoDriveTime;
+import static frc.robot.Constants.DrivetrainConstants.kAutoSpeed;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
@@ -39,8 +42,8 @@ public final class Autos {
                 .withTimeout(LauncherConstants.kLauncherDelay))
         .andThen(new LaunchNote(m_launcher)
                 .withTimeout(0.5))
-        .andThen(Commands.run(() -> drivetrain.drive(0.75, 0, 0), drivetrain)
-                .withTimeout(0.5))
+        .andThen(Commands.run(() -> drivetrain.drive(kAutoSpeed, 0, 0), drivetrain)
+                .withTimeout(kAutoDriveTime))
         .andThen(Commands.run(() -> drivetrain.drive(0, 0, 0), drivetrain));
        
   }
