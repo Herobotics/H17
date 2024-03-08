@@ -95,8 +95,8 @@ public class RobotContainer {
 
     // Set up a binding to run the intake command while the operator is pressing and holding the
     // left Bumper
-    m_driverController.leftBumper().whileTrue(m_launcher.getIntakeCommand());
-    m_operatorController.leftBumper().whileTrue(m_launcher.getIntakeCommand());
+    m_driverController.leftTrigger().whileTrue(m_launcher.getIntakeCommand());
+    m_operatorController.leftTrigger().whileTrue(m_launcher.getIntakeCommand());
 
     m_launcher.setDefaultCommand(
         new RunCommand(
