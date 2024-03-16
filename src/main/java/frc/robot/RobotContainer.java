@@ -101,7 +101,7 @@ public class RobotContainer {
     m_launcher.setDefaultCommand(
         new RunCommand(
             () ->
-                m_launcher.setLaunchWheel(applyDeadband(m_operatorController.getLeftY())),
+                m_launcher.setLaunchWheel(applyDeadband(-m_operatorController.getLeftY())),
             m_launcher));
     
     m_operatorController

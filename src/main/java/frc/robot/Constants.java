@@ -59,6 +59,6 @@ public final class Constants {
     public static final double kIntakeLauncherSpeed = -1;
     public static final double kIntakeFeederSpeed = -.2;
 
-    public static final double kLauncherDelay = 1.0;
+    public static final double kLauncherDelay = 0.75;
   }
 }
