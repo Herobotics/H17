@@ -37,6 +37,7 @@ public class Robot extends TimedRobot {
     // Shuffleboard.getTab("Example tab").add(CANDrivetrain.imu);
     m_robotContainer.calibrateGyro();
     CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture();
   }
 
   /**
