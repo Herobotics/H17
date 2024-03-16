@@ -7,6 +7,7 @@ package frc.robot.commands;
 import static frc.robot.Constants.DrivetrainConstants.kAutoDriveTime;
 import static frc.robot.Constants.DrivetrainConstants.kAutoSpeed;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
@@ -20,6 +21,10 @@ import frc.robot.subsystems.PWMLauncher;
 
 public final class Autos {
 
+    private static final String kshootandgobackwords = "shoot and move forward";
+    private String m_autoSelected;
+    private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
   /** Example static factory for an autonomous command. */
   public static Command exampleAuto(CANDrivetrain drivetrain, PWMLauncher m_launcher) {
     /**
@@ -28,6 +33,7 @@ public final class Autos {
      * with the .withTimeout(1) decorator to timeout after 1 second, and use the .andThen decorator
      * to stop the drivetrain after the first command times out
      */
+
     //  return new PrintCommand("starting aut")
     //  //.andThen( Commands.run (() -> drivetrain.drive(0, 0, 0), drivetrain))
     //  .andThen( new PrintCommand("..start prepare..."))
