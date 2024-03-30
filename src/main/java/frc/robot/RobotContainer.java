@@ -98,6 +98,9 @@ public class RobotContainer {
     m_driverController.leftTrigger().whileTrue(m_launcher.getIntakeCommand());
     m_operatorController.leftTrigger().whileTrue(m_launcher.getIntakeCommand());
 
+    m_driverController.rightTrigger().whileTrue(m_launcher.getGroundIntakeCommand());
+    m_operatorController.rightTrigger().whileTrue(m_launcher.getGroundIntakeCommand());
+
     m_launcher.setDefaultCommand(
         new RunCommand(
             () ->
@@ -107,7 +110,11 @@ public class RobotContainer {
     m_operatorController
         .x()
         .whileTrue(m_launcher.getFeedWheelOutCommand());
+        
 
+    m_operatorController
+        .rightStick()
+        .whileTrue(m_launcher.getNoteOut());
   }
 
   /**

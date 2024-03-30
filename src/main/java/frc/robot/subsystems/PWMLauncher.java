@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.LauncherConstants.*;
 
-// import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -14,11 +14,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class PWMLauncher extends SubsystemBase {
   VictorSP m_launchWheel;
   VictorSP m_feedWheel;
+  Spark m_lowerRoller;
+  Spark m_upperRoller;
 
   /** Creates a new Launcher. */
   public PWMLauncher() {
     m_launchWheel = new VictorSP(kLauncherID);
     m_feedWheel = new VictorSP(kFeederID);
+    m_lowerRoller = new Spark(kLowerRollerID);
+    m_upperRoller = new Spark(kUpperRollerID);
   }
 
   /**
@@ -43,6 +47,36 @@ public class PWMLauncher extends SubsystemBase {
         });
   }
 
+  public Command getGroundIntakeCommand() {
+    // The startEnd helper method takes a method to call when the command is initialized and one to
+    // call when it ends
+    return this.startEnd(
+        // When the command is initialized, set the wheels to the intake speed values
+        () -> {
+              m_lowerRoller.set(kLowerRollerSpeed);
+              m_upperRoller.set(kUpperRollerSpeed);
+        },
+        // When the command stops, stop the wheels
+        () -> {
+          stop();
+        });
+  }
+
+  public Command getNoteOut() {
+    // The startEnd helper method takes a method to call when the command is initialized and one to
+    // call when it ends
+    return this.startEnd(
+        () -> {
+              m_lowerRoller.set(-kLowerRollerSpeed);
+              m_upperRoller.set(-kUpperRollerSpeed);
+              setFeedWheel(-kIntakeFeederSpeed);
+              setLaunchWheel(-kIntakeLauncherSpeed);
+        },
+        // When the command stops, stop the wheels
+        () -> {
+          stop();
+        });
+  }
    /**
    * Feed out the note. Launch wheel speed sold separately.
    */
@@ -75,5 +109,7 @@ public class PWMLauncher extends SubsystemBase {
   public void stop() {
     m_launchWheel.set(0);
     m_feedWheel.set(0);
+    m_lowerRoller.set(0);
+    m_upperRoller.set(0);
   }
 }
