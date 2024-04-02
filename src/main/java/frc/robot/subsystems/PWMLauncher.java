@@ -16,6 +16,7 @@ public class PWMLauncher extends SubsystemBase {
   VictorSP m_feedWheel;
   Spark m_lowerRoller;
   Spark m_upperRoller;
+  Spark m_middleWheel;
 
   /** Creates a new Launcher. */
   public PWMLauncher() {
@@ -23,6 +24,7 @@ public class PWMLauncher extends SubsystemBase {
     m_feedWheel = new VictorSP(kFeederID);
     m_lowerRoller = new Spark(kLowerRollerID);
     m_upperRoller = new Spark(kUpperRollerID);
+    m_middleWheel = new Spark(kmiddleWheelID);
   }
 
   /**
@@ -55,6 +57,7 @@ public class PWMLauncher extends SubsystemBase {
         () -> {
               m_lowerRoller.set(kLowerRollerSpeed);
               m_upperRoller.set(kUpperRollerSpeed);
+              m_middleWheel.set(kmiddleWheelSpeed);
         },
         // When the command stops, stop the wheels
         () -> {
@@ -71,6 +74,7 @@ public class PWMLauncher extends SubsystemBase {
               m_upperRoller.set(-kUpperRollerSpeed);
               setFeedWheel(-kIntakeFeederSpeed);
               setLaunchWheel(-kIntakeLauncherSpeed);
+              m_middleWheel.set(kmiddleWheelSpeed);
         },
         // When the command stops, stop the wheels
         () -> {
@@ -111,5 +115,6 @@ public class PWMLauncher extends SubsystemBase {
     m_feedWheel.set(0);
     m_lowerRoller.set(0);
     m_upperRoller.set(0);
+    m_middleWheel.set(0);
   }
 }

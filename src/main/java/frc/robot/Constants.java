@@ -49,6 +49,7 @@ public final class Constants {
     public static final int kLauncherID = 0;
     public static final int kLowerRollerID = 2;
     public static final int kUpperRollerID = 3;
+    public static final int kmiddleWheelID = 4;
 
     // Current limit for launcher and feed wheels
     public static final int kLauncherCurrentLimit = 80;
@@ -60,8 +61,9 @@ public final class Constants {
     public static final double kLaunchFeederSpeed = 1;
     public static final double kIntakeLauncherSpeed = -1;
     public static final double kIntakeFeederSpeed = -.2;
-    public static final double kUpperRollerSpeed = 0.1;
-    public static final double kLowerRollerSpeed = 0.1;
+    public static final double kUpperRollerSpeed = -0.5;
+    public static final double kLowerRollerSpeed = 0.7;
+    public static final double kmiddleWheelSpeed = 1;
 
     public static final double kLauncherDelay = 0.75;
   }

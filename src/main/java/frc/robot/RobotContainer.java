@@ -99,7 +99,9 @@ public class RobotContainer {
     m_operatorController.leftTrigger().whileTrue(m_launcher.getIntakeCommand());
 
     m_driverController.rightTrigger().whileTrue(m_launcher.getGroundIntakeCommand());
+    m_driverController.rightBumper().whileTrue(m_launcher.getGroundIntakeCommand());
     m_operatorController.rightTrigger().whileTrue(m_launcher.getGroundIntakeCommand());
+    m_operatorController.rightBumper().whileTrue(m_launcher.getGroundIntakeCommand());
 
     m_launcher.setDefaultCommand(
         new RunCommand(
