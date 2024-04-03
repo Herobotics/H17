@@ -74,7 +74,7 @@ public class PWMLauncher extends SubsystemBase {
               m_upperRoller.set(-kUpperRollerSpeed);
               setFeedWheel(-kIntakeFeederSpeed);
               setLaunchWheel(-kIntakeLauncherSpeed);
-              m_middleWheel.set(kmiddleWheelSpeed);
+              m_middleWheel.set(-kmiddleWheelSpeed);
         },
         // When the command stops, stop the wheels
         () -> {
@@ -91,6 +91,7 @@ public class PWMLauncher extends SubsystemBase {
         // When the command is initialized, set the wheels to the intake speed values
         () -> {
           setFeedWheel(kLaunchFeederSpeed);
+          m_middleWheel.set(kmiddleWheelSpeed);
         },
         // When the command stops, stop the wheels
         () -> {
