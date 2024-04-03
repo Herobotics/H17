@@ -115,7 +115,7 @@ public class RobotContainer {
         
 
     m_operatorController
-        .rightStick()
+        .back()
         .whileTrue(m_launcher.getNoteOut());
   }
 
