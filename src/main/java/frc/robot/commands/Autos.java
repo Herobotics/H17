@@ -48,7 +48,7 @@ public final class Autos {
                 .withTimeout(LauncherConstants.kLauncherDelay))
         .andThen(new LaunchNote(m_launcher)
                 .withTimeout(0.5))
-        .andThen(Commands.run(() -> drivetrain.drive(kAutoSpeed, 0, 0), drivetrain)
+        .andThen(new BackupWithFeeding(drivetrain, m_launcher)
                 .withTimeout(kAutoDriveTime))
         .andThen(Commands.run(() -> drivetrain.drive(0, 0, 0), drivetrain));
        
