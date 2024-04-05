@@ -16,6 +16,7 @@ import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.Constants.LauncherConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.GroundIntake;
 import frc.robot.commands.LaunchNote;
 import frc.robot.commands.PrepareLaunch;
 import frc.robot.subsystems.CANDrivetrain;
@@ -98,10 +99,8 @@ public class RobotContainer {
     m_driverController.leftTrigger().whileTrue(m_launcher.getIntakeCommand());
     m_operatorController.leftTrigger().whileTrue(m_launcher.getIntakeCommand());
 
-    m_driverController.rightTrigger().whileTrue(m_launcher.getGroundIntakeCommand());
-    m_driverController.rightBumper().whileTrue(m_launcher.getGroundIntakeCommand());
-    m_operatorController.rightTrigger().whileTrue(m_launcher.getGroundIntakeCommand());
-    m_operatorController.rightBumper().whileTrue(m_launcher.getGroundIntakeCommand());
+    m_driverController.rightTrigger().whileTrue(new GroundIntake(m_launcher));
+    m_operatorController.rightTrigger().whileTrue(new GroundIntake(m_launcher));
 
     m_launcher.setDefaultCommand(
         new RunCommand(
