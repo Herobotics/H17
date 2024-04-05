@@ -112,7 +112,10 @@ public class RobotContainer {
     m_operatorController
         .x()
         .whileTrue(m_launcher.getFeedWheelOutCommand());
-        
+    
+    m_operatorController
+        .b()
+        .whileTrue(new PrepareLaunch(m_launcher));    
 
     m_operatorController
         .back()
