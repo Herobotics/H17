@@ -49,7 +49,7 @@ public class PWMLauncher extends SubsystemBase {
         });
   }
 
-  public Command getMiddleGroundSpinupCommand() {
+  public Command getGroundSpinupCommand() {
     // The startEnd helper method takes a method to call when the command is initialized and one to
     // call when it ends
     return this.startEnd(
@@ -76,6 +76,13 @@ public class PWMLauncher extends SubsystemBase {
         () -> {
           stop();
         });
+  }
+
+  public Command getGroundIntakeCommand() {
+    return this.getGroundSpinupCommand()
+      .withTimeout(kIntakeDelay)
+      .andThen(this.getFullGroundIntakeCommand())
+      .handleInterrupt(() -> this.stop());
   }
 
   public Command getNoteOut() {

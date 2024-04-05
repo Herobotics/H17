@@ -27,9 +27,10 @@ public class GroundIntake extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_launcher.getMiddleGroundSpinupCommand()
+    m_launcher.getGroundSpinupCommand()
             .withTimeout(kIntakeDelay)
-            .andThen(m_launcher.getFullGroundIntakeCommand());
+            .andThen(m_launcher.getFullGroundIntakeCommand())
+            .initialize();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -44,6 +45,7 @@ public class GroundIntake extends Command {
   @Override
   public void end(boolean interrupted) {
     // Do nothing when the command ends. The launch wheel needs to keep spinning in order to launch
+    m_launcher.stop();
   }
 
   // Returns true when the command should end.
