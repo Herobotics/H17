@@ -66,5 +66,6 @@ public final class Constants {
     public static final double kmiddleWheelSpeed = 1;
 
     public static final double kLauncherDelay = 0.75;
+    public static final double kIntakeDelay = 0.75;
   }
 }

@@ -8,7 +8,6 @@ import static frc.robot.Constants.LauncherConstants.*;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.subsystems.CANDrivetrain;
 import frc.robot.subsystems.PWMLauncher;
 import frc.robot.Constants.DrivetrainConstants;
@@ -18,12 +17,11 @@ import frc.robot.Constants.DrivetrainConstants;
 /*This is an example of creating a command as a class. The base Command class provides a set of methods that your command
  * will override.
  */
-public class BackupWithFeeding extends ParallelCommandGroup {
+public class GroundIntake extends Command {
   /** Creates a new LaunchNote. */
-  public BackupWithFeeding(CANDrivetrain drivetrain, PWMLauncher launcher) {
-    addCommands(
-        launcher.getFullGroundIntakeCommand(),
-        Commands.run(() -> drivetrain.drive(DrivetrainConstants.kAutoSpeed, 0, 0), drivetrain)
-    );
-  }
+  public GroundIntake(PWMLauncher launcher) {
+    return launcher.getMiddleGroundSpinupCommand()
+                .withTimeout(kIntakeDelay)
+                .andThen(launcher.getFullGroundIntakeCommand());
+    }
 }

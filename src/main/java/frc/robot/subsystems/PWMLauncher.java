@@ -49,7 +49,20 @@ public class PWMLauncher extends SubsystemBase {
         });
   }
 
-  public Command getGroundIntakeCommand() {
+  public Command getMiddleGroundSpinupCommand() {
+    // The startEnd helper method takes a method to call when the command is initialized and one to
+    // call when it ends
+    return this.startEnd(
+        // When the command is initialized, set the wheels to the intake speed values
+        () -> {
+              m_middleWheel.set(kmiddleWheelSpeed);
+        },
+        // When the command stops, stop the wheels
+        () -> {
+        });
+  }
+
+  public Command getFullGroundIntakeCommand() {
     // The startEnd helper method takes a method to call when the command is initialized and one to
     // call when it ends
     return this.startEnd(
